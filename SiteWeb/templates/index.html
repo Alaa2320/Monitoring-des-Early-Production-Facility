@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='static/css.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ </head>
+ <body class="img js-fullheight" style="background-image:url('https://lapatrienews.dz/wp-content/uploads/2021/12/sonatrach-3.jpg');height: 80vh; background-size: cover;
+      background-repeat:no-repeat;background-position: center center; ">
+
+  <nav style="background: rgb(0,0,0,0.6);overflow-x: auto;
+  max-width: 100%;">
+    <div class="container-fluid d-flex align-items-center">
+      <img src="{{ url_for('static', filename='pivs/Sonatrach.svg') }}" style="width: 50px; height: 50px; margin-left: 30px; margin-right: 20px;">
+      <a class="navbar-brand" href="https://sonatrach.com/" style="color: darkorange; cursor: pointer;font-size: 30px;">         
+        <strong>Sonatrach</strong> 
+      </a>
+      <div class="ml-auto" style=" padding-right:75%;">
+        <a class="nav-link active" aria-current="page" href="#" style="color: darkorange; display: inline-block;font-size:18px ;"><i class="fa fa-fw fa-home"></i>Home</a>
+        <a class="nav-link" href="{{ url_for('login')}}" style="color: darkorange; display: inline-block; margin-left: 10px; font-size:18px ;"><i class="fa fa-fw fa-user"></i>Login</a>
+      
+      </div>
+    </div>
+  </nav>
+ </body>
+</html>

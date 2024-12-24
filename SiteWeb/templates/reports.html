@@ -1,0 +1,212 @@
+{% extends 'dashboard_user.html' %}
+{% block content %}
+
+<!-- Navigation Bar -->
+<nav class="navbar rounded-pill d-flex justify-content-between">
+  
+  <form action="/search" method="get" class="search" style="display: flex; align-items: center; padding-right:22px;">
+    <input class="form-control mr-sm-2" type="search" name="separateur" placeholder="Search..." aria-label="Search">
+    <img src="{{ url_for('static', filename='pivs/avat.png') }}" alt="Image" style="width: 23%; height: 23%; padding-left: 10%;">
+  </form>
+  
+</nav>
+
+<div class="container">
+  <div class="card" style="height: 61%;">
+    <div class="card-body">
+      <strong><h3>Create New Report</h3></strong>   
+      
+      <form action="/add_report" method="post" enctype="multipart/form-data" class="form" style="width: 97%;">
+        <div class="mb-3">
+          <label for="report-name" class="form-label" style="padding-left:22px;">Report Name:</label>
+
+          <input type="text" id="report-name" name="report-name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="report-description" class="form-label" style="padding-left:22px; margin-top: 1%;">Report Description:</label>
+          <textarea id="report-description" name="report-description" class="form-control" required style="margin-top: 2%;height: 150px; display: inline-block; "></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="report-file" class="form-label" style="padding-left:22px; margin-top: 2%;">Upload File:</label>
+          <input type="file" id="report-file" name="report-file" class="form-control" accept=".csv, .pdf, .txt" style="margin-top: 2%;">
+        </div>
+        <div class="butn">
+          <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Create Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-12"style="padding-top:20px;" >
+      <div class="card" >
+        <strong><h3>OVERVIEW</h3></strong>   
+        <strong class="rep">Reports</strong>
+        <hr>
+        <div class="card-body">
+          <div class="table-container">
+            <table class="table table-bordered" id="report-table">
+              <thead>
+                <tr>
+                  <th>Report Name</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for report in reports %}
+                <tr>
+                  <td>{{ report.name }}</td>
+                  <td>{{ report.description }}</td>
+                  <td>
+                  
+                      <form action="/edit_report/{{ report.id }}" method="get" style="display: inline;">
+                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                      </form>
+                      <form action="/delete_report/{{ report.id }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="POST">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>
+                      <a href="https://mail.google.com/mail/u/0/#inbox" class="btn btn-success">Share</a>
+                                      
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <div id="no-results-message" style="display: none; color: red; padding-left: 38%; font-size: large;">No matching results found.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+    padding-left: 16%;
+    justify-content: center;
+    padding-right: 5%;
+    width: 95%;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding-top: 0px;
+  }
+
+  .form-control {
+    margin-left: 15px;
+    margin-right: 1000%;
+    border-radius: 18px;
+  }
+
+  .butn {
+    padding-left: 1%;
+    margin-left: 43%;
+    margin-right: 222px;
+  }
+
+  .navbar {
+    background-color: white;
+    margin-left: 15%;
+    margin-right: 3%;
+    border-radius: 25px;
+  }
+
+  .rep {
+    font-size: 20px;
+    color: #040725;
+    padding-left: 15px;
+  }
+
+  .card-body {
+    padding-top: 0px;
+  }
+
+  h3 {
+    padding-left: 40%;
+    color: antiquewhite;
+    background-color: #27254c;
+  }
+
+  .card {
+    width: 100%;
+    padding-top: 0px;
+    border-radius: 11px;
+    border: 1px solid #d3d3d3;
+    background-color: rgb(253, 253, 253);
+  }
+
+  .card-title {
+    font-size: large;
+    color: #040725;
+    padding-left: 15px;
+  }
+  
+  .search {
+    padding-left: 70%;
+    padding-top: 5px;
+    padding-right: 6%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .search input[type="search"] {
+    margin-right: 2px;
+    color: #040725;
+    background-color: #f9f9f9;
+    border-radius: 200px;
+    border: 1px solid #23023a;
+    padding: 5px;
+  }
+
+  .table-container {
+    margin: 10px;
+  }
+
+  .form-inline {
+    padding-left: 88%;
+    margin-top: 5%;
+    padding-top: 10%;
+  }
+
+  .button-container {
+    text-align: center;
+  }
+</style>
+<!-- Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('.search input[type="search"]');
+    const table = document.getElementById('report-table');
+    const noResultsMessage = document.getElementById('no-results-message');
+
+    searchInput.addEventListener('input', () => {
+      const keyword = searchInput.value.toLowerCase();
+      const rows = table.getElementsByTagName('tr');
+      let matchingRowFound = false;
+
+      for (let i = 0; i < rows.length; i++) {
+        const reportNameCell = rows[i].querySelector('td:first-child');
+        const reportName = reportNameCell.textContent.toLowerCase();
+
+        if (reportName.includes(keyword)) {
+          rows[i].style.display = '';
+          matchingRowFound = true;
+        } else {
+          rows[i].style.display = 'none';
+        }
+      }
+
+      if (matchingRowFound) {
+        noResultsMessage.style.display = 'none';
+      } else {
+        noResultsMessage.style.display = '';
+      }
+    });
+  });
+</script>
+
+
+{% endblock %}

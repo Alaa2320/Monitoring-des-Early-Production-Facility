@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="https://use.remixapi.com/releases/v2.0.1/remixicon.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-image: url('https://www.jeuneafrique.com/cdn-cgi/image/q=100,f=auto,metadata=none,width=1024,height=688/https://www.jeuneafrique.com/medias/2022/11/15/jad20221115-mmo-algerie-sonatrach-augusta-photo2-1024x688.jpg');
+      height: 100vh;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .card {
+      background: rgb(0,0,0,0.4);
+      border-radius: 55px;
+    }
+    .form-control {
+      border-radius: 50px;
+    }
+    .row {
+      padding-top: 70px;
+    }
+    .login-icon {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+  </style>
+ </head>
+
+ <body class="img js-fullheight">
+  <div class="row">
+    <div class="col-sm-10 col-md-6 col-lg-4 mx-auto">     
+      <div class="card bg-body rounded m-5">
+        <h5 class="card-title text-center  ">
+          <img src="{{ url_for('static', filename='pivs/looo.png') }}"  style="width: 150px; height: 150px; margin-bottom:5px;">
+        </h5>
+
+        <form class="form-group" action="{{ url_for('login') }}" method="post">
+          <div class="cardd">
+            <label for="floatingInput"><i class="ri-user-line"></i> <strong style="color: rgb(7, 10, 12);"> Username</strong> </label>
+            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username"><hr>
+          </div>
+          <div class="form-floating mb-3">
+            <label for="floatingPassword"><i class="ri-lock-line"></i><strong style="color: rgb(7, 10, 12);">  Password</strong>
+             </label>
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck" name="remember">
+            <label class="form-check-label" for="rememberPasswordCheck">
+              <strong style="color: rgb(7, 10, 12);">  Remember password</strong>
+            
+            </label>
+          </div>
+          <div class="d-grid text-center">
+            <button class="btn btn-warning   btn-lg" aria-pressed="true"type="submit">Login</button>
+          </div>
+        </form>
+        <div>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ message }}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+

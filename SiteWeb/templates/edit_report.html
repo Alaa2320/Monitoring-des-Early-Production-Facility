@@ -1,0 +1,104 @@
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+
+  <!----======== CSS ======== -->
+
+  <!----===== Boxicons CSS ===== -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+  <!--<title>Dashboard Sidebar Menu</title>-->
+</head>
+
+<body style="    background-color: #eeeeee;
+
+">
+    <div class="card" style="height: 55%;">
+      <div class="card-body">
+        <strong><h2>Update Report</h2></strong>   
+        
+        <form action="/update_report/{{ report.id }}" method="post" class="form" style="width: 97%;">
+          <div class="mb-3">
+            <label for="report-name" class="form-label" style="padding-left:1%;margin-left: 1%;font-size: 20px;"><strong>Name:</strong> </label><br>
+  
+            <input type="text" id="name" name="name" value="{{ report.name }} " style="border-radius: 18px;margin-top:1%; width: 99%;margin-left: 2%; height: 6%;"><br>
+          </div>
+          <div class="mb-3">
+            <label for="description" style=" margin-top:1px; padding-left:1%; padding-top: 1%;margin-left: 1%;font-size: 20px; "> <strong>Description:</strong> </label>
+
+            <textarea id="description" name="description" style="margin-top: 2%;height: 150px; width: 80%;border-radius: 18px;margin-left: 2%;width: 99%; ">{{ report.description }}</textarea>
+          </div><br>
+          
+          <div class="butn">
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <style>
+    
+    
+      .form-control {
+        margin-left: 15px;
+        margin-right: 1000%;
+        border-radius: 18px;
+      }
+    
+      .butn {
+        padding-left: 1%;
+        margin-left: 43%;
+        margin-right: 222px;
+      }
+    
+    
+      .rep {
+        font-size: 20px;
+        color: #040725;
+        padding-left: 15px;
+      }
+    
+      .card-body {
+       margin-top: 2%;
+
+      }
+    
+      h2 {
+        padding-left: 40%;
+        color: antiquewhite;
+        background-color: #27254c;
+      }
+    
+      .card {
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 2%;
+          margin-top: 10%;
+        border-radius: 11px;
+        border: 2px solid #d3d3d3;
+        background-color: rgb(253, 253, 253);
+      }
+    
+      .card-title {
+        font-size: large;
+        color: #040725;
+        padding-left: 15px;
+      }
+    
+    
+      .form-inline {
+        padding-left: 88%;
+        margin-top: 5%;
+        padding-top: 10%;
+      }
+    
+      .button-container {
+        text-align: center;
+      }
+    </style>
+</body>
